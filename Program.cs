@@ -1,4 +1,4 @@
-﻿
+﻿using lab_1_toliik_nooolik;
 class Program
 {
     static void Main()

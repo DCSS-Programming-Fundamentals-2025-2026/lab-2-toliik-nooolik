@@ -1,4 +1,6 @@
-﻿public class HangmanEngine
+﻿namespace lab_1_toliik_nooolik
+{
+public class HangmanEngine
 {
     private string _targetWord;
     private bool[] _revealed;
@@ -56,4 +58,5 @@
 
     public bool IsGameOver() => CurrentLives <= 0 || IsWon();
     public string GetSecretWord() => _targetWord;
+}
 }

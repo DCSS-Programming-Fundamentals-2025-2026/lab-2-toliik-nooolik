@@ -1,4 +1,5 @@
-﻿public static class GameInterface
+﻿using lab_1_toliik_nooolik;
+public static class GameInterface
 {
     public static void Render(HangmanEngine engine)
     {
