@@ -4,6 +4,9 @@ class Program
     static void Main()
     {
         WordProvider wordProvider = new WordProvider();
+
+        GameSessionCollection history = new GameSessionCollection();
+
         bool wantToPlay = true;
 
         while (wantToPlay)
@@ -27,6 +30,9 @@ class Program
             else
                 Console.WriteLine($"\n[Тебе повісили] Слово було: {game.GetSecretWord()}");
 
+            int mistakes = 6 - game.CurrentLives;
+            history.Add(new GameSession(secret, game.IsWon(), mistakes));
+
 
             Console.WriteLine("\nЩе раз?  (y/n)");
             string choice = Console.ReadLine().ToLower();
@@ -34,6 +40,19 @@ class Program
             {
                 wantToPlay = false;
             }
+        }
+
+        Console.WriteLine("\n=== СТАТИСТИКА ІГОР (відсортовано за помилками) ===");
+        
+        history.Sort(); 
+
+        IEnumerator it = history.GetEnumerator();
+        
+        while (it.MoveNext())
+        {
+            GameSession s = (GameSession)it.Current;
+            string status = s.IsWon ? "Виграв" : "Програв";
+            Console.WriteLine($"Слово: {s.Word} | Помилок: {s.Mistakes} | Статус: {status}");
         }
 
         Console.WriteLine("Бувай");
